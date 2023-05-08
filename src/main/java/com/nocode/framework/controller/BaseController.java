@@ -14,6 +14,7 @@ public class BaseController {
         System.out.println("프로젝트 ID : " + req.getParameter("projectId"));
         System.out.println("프로젝트 이름 : " + req.getParameter("projectNm"));
 
+        //수용 로그 남김
         return "성공1234";
     }
 }
