@@ -1,0 +1,61 @@
+<mvc:View
+        controllerName="sap.ui.eland.controller.framework.App"
+        xmlns="sap.m"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:tnt="sap.tnt">
+
+
+    <!-- 메인화면 -->
+    <App id="app" visible="{=${/loginStatus} ? true : false}">
+        <tnt:ToolPage id="toolPage" visible="true">
+            <tnt:header>
+                <tnt:ToolHeader>
+                    <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent"
+                            press=".onSideNavButtonPress"/>
+                    <Button text="EICS" class="logoStyle" type="Transparent" press="onGotoHome"/>
+                    <ToolbarSpacer/>
+                    <Button id="userButton" text="로그아웃" type="Transparent" press="onLogout"/>
+                </tnt:ToolHeader>
+            </tnt:header>
+            <tnt:sideContent>
+                <tnt:SideNavigation
+                        expanded="true"
+                        itemSelect=".onItemSelect">
+                    <tnt:NavigationList>
+                        <tnt:NavigationListItem text="대쉬보드(대기)" key="dashboard"/>
+                        <tnt:NavigationListItem text="세그먼트 리스트(완료)" key="segmentList"/>
+<!--                        <tnt:NavigationListItem text="세그먼트 생성(진행중)" key="segmentCreate"/>-->
+                        <tnt:NavigationListItem text="캠페인 리스트(대기)" key="campaignList"/>
+                        <tnt:NavigationListItem text="캠페인 생성(대기)" key="campaignCreate"/>
+                    </tnt:NavigationList>
+                </tnt:SideNavigation>
+            </tnt:sideContent>
+            <tnt:mainContents>
+                <NavContainer id="NavContainer">
+                    <pages>
+                        <!-- Added by the router -->
+                    </pages>
+                </NavContainer>
+            </tnt:mainContents>
+        </tnt:ToolPage>
+    </App>
+
+
+    <!-- 로그인 화면 -->
+    <App backgroundImage="/resources/image/login.jpg" visible="{=${/loginStatus} ? false : true}" >
+        <pages>
+            <Page showHeader="false">
+                <content>
+                    <VBox justifyContent="Center" alignItems="Center" height="500px" >
+                        <Title titleStyle="H2" text="Login" />
+                        <Input value="{/id}" placeholder="id" />
+                        <Input type="Password" value="{/password}"  placeholder="password" />
+                        <Button text="로그인" press="onLogin" type="Emphasized"/>
+                    </VBox>
+                </content>
+            </Page>
+        </pages>
+    </App>
+
+
+</mvc:View>

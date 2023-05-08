@@ -1,0 +1,70 @@
+<mvc:View controllerName="sap.ui.eland.controller.segment.segmentList"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:core="sap.ui.core"
+          xmlns:form="sap.ui.layout.form"
+          xmlns:u="sap.ui.unified"
+          xmlns:tnt="sap.tnt"
+          xmlns:t="sap.ui.table" height="100%" class="mainStyle">
+
+    <Page id="segmentList" showHeader="false">
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="세그먼트 리스트({=${/segments}.length}건)"/>
+                    <ToolbarSpacer/>
+                    <Button icon="sap-icon://add-document" text="신규 세그먼트 생성" type="Emphasized" press="onCreateSegment"/>
+                </OverflowToolbar>
+            </headerToolbar>
+            <content>
+                <t:Table class="Table1" rows="{/segments}" selectionMode="Single" selectionBehavior="Row"
+                         rowSelectionChange="onSegmentClick" visibleRowCount="20">
+                    <t:columns>
+                        <t:Column>
+                            <Label text="세그먼트"/>
+                            <t:template>
+                                <Link text="{name}" press="onSegmentClick"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="설명"/>
+                            <t:template>
+                                <Text text="{desc}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="상태"/>
+                            <t:template>
+                                <Text text="{status}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="생성일"/>
+                            <t:template>
+                                <Text text="{createDatetime}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="생성자"/>
+                            <t:template>
+                                <Text text="{createBy}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="290px">
+                            <Label text="액션"/>
+                            <t:template>
+                                <HBox>
+                                    <Button class="sapUiTinyMarginEnd" text="삭제"  press="onDeleteSegment" visible="{=${status} === 'STOP'}"/>
+                                    <Button class="sapUiTinyMarginEnd" text="중단" press="onStopSegment" visible="{=${status} === 'RELE'}"/>
+                                    <Button class="sapUiTinyMarginEnd" text="실행" press="onExecuteSegment" visible="{=${status} === 'STOP'}"/>
+                                </HBox>
+                            </t:template>
+                        </t:Column>
+
+                    </t:columns>
+                </t:Table>
+            </content>
+        </Panel>
+    </Page>
+
+</mvc:View>

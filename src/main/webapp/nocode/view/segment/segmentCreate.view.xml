@@ -1,0 +1,184 @@
+<mvc:View controllerName="sap.ui.eland.controller..segment.segmentCreate"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:core="sap.ui.core"
+          xmlns:form="sap.ui.layout.form"
+          xmlns:u="sap.ui.unified"
+          xmlns:tnt="sap.tnt"
+          xmlns:t="sap.ui.table" height="100%" class="mainStyle">
+
+    <Page id="segmentCreate" showHeader="false">
+        <subHeader>
+            <OverflowToolbar>
+                <content>
+                    <Title id="pageTitle" text="세그먼트 상세"/>
+                    <ToolbarSpacer/>
+                    <Button icon="sap-icon://save" text="생성" type="Emphasized" press="onSegmentSave"
+                            visible="{=${/currentRoute} === 'segmentCreate'}"/>
+                    <Button icon="sap-icon://sys-cancel" text="취소" type="Emphasized" press="onSegmentCreateCnacel"
+                            visible="{=${/currentRoute} === 'segmentCreate'}"/>
+                </content>
+            </OverflowToolbar>
+        </subHeader>
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region" expandable="true"
+               expanded="true">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="기본 정보"/>
+                    <ToolbarSpacer/>
+                    <!-- <Button icon="sap-icon://search" text="검색" type="Reject"/> -->
+                </OverflowToolbar>
+            </headerToolbar>
+            <content>
+                <form:SimpleForm editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false"
+                                 class="SimpleForm1">
+                    <form:content>
+                        <core:Title text=""/>
+                        <Label text="세그먼트ID"/>
+                        <Input value="{/segment/basicInfo/id}" editable="false"/>
+                        <Label text="세그먼트명"/>
+                        <Input value="{/segment/basicInfo/name}"/>
+                        <Label text="상태"/>
+                        <Input value="{/segment/basicInfo/status}" editable="false"/>
+
+                        <core:Title text=""/>
+                        <Label text="생성일"/>
+                        <Input value="{/segment/basicInfo/createDatetime}" editable="false"/>
+                        <Label text="생성자"/>
+                        <Input value="{/segment/basicInfo/createBy}" editable="false"/>
+                        <Label text="수정일"/>
+                        <Input value="{/segment/basicInfo/modifyDatetime}" editable="false"/>
+                        <Label text="수정자"/>
+                        <Input value="{/segment/basicInfo/modifyBy}" editable="false"/>
+                    </form:content>
+                </form:SimpleForm>
+            </content>
+        </Panel>
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region" expandable="true"
+               expanded="true">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="집계데이터 정보"/>
+                    <ToolbarSpacer/>
+                    <!-- <Button icon="sap-icon://search" text="검색" type="Reject"/> -->
+                </OverflowToolbar>
+            </headerToolbar>
+            <content>
+                <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+                                 labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false"
+                                 emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+                                 columnsL="2" columnsM="1" singleContainerFullSize="false">
+                    <form:content>
+                        <Label text="집계데이터 형태"/>
+                        <RadioButtonGroup id="segRadio" select="onSegTypeClick" selectedIndex="-1"
+                                          columns="4" width="100%" class="sapUiMediumMarginBottom segRadioStyle">
+                            <RadioButton id="DBSQL" text="DB SQL"/>
+                            <RadioButton id="FILEUPLOAD" text="파일 업로드"/>
+                            <RadioButton id="AWSS3TOBRAZE" text="AWS S3(Braze 형식)"/>
+
+                        </RadioButtonGroup>
+                    </form:content>
+                </form:SimpleForm>
+                <VBox visible="{=${/segment/typeInfo/type} === 'DBSQL'}">
+                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+                                     labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false"
+                                     emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                                     columnsXL="2" columnsL="2" columnsM="1"
+                                     singleContainerFullSize="false">
+                        <form:content>
+                            <core:Title text="접속정보"/>
+                            <Label text="DB 유형"/>
+                            <Input value="MySql"/>
+                            <Label text="접속 정보"/>
+                            <Input value="http://localhost:3306"/>
+                            <Label text="접속 ID"/>
+                            <Input value="lsyrock"/>
+                            <Label text="접속 PW"/>
+                            <Input value="*******"/>
+                            <Label text=""/>
+                            <Button text="연결 확인" press="onConnectTest"/>
+                            <core:Title text="쿼리"/>
+                            <Label text="쿼리"/>
+                            <TextArea value="" growing="true"/>
+                        </form:content>
+                    </form:SimpleForm>
+                </VBox>
+                <VBox visible="{=${/segment/typeInfo/type} === 'AWSS3TOBRAZE'}">
+                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+                                     labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false"
+                                     emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                                     columnsXL="2" columnsL="2" columnsM="1"
+                                     singleContainerFullSize="false">
+                        <form:content>
+                            <Label text="선택"/>
+                            <ComboBox showSecondaryValues="true" items="{/AwsS3ToBrazeList}"
+                                      change="onAwsS3ToBrazeListSelect">
+                                <core:ListItem key="{key}" text="{typeDesc}" additionalText="{key}"/>
+                            </ComboBox>
+                            <Label text=""/>
+                            <Text text="※사전에 정의된 파일과 클래스가 있어야만 등록 가능합니다.(시스템관리자에게 문의주세요)"/>
+                        </form:content>
+                    </form:SimpleForm>
+                </VBox>
+                <VBox visible="{=${/segment/typeInfo/type} === 'FILEUPLOAD'}">
+                    <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+                                     labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false"
+                                     emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                                     columnsXL="2" columnsL="2" columnsM="1"
+                                     singleContainerFullSize="false">
+                        <form:content>
+                            <Label text=""/>
+                            <u:FileUploader id="fileUploader" name="myFileUpload" uploadUrl="upload/"
+                                            tooltip="Upload your file to the local server"
+                                            uploadComplete="handleUploadComplete"/>
+                        </form:content>
+                    </form:SimpleForm>
+
+                </VBox>
+            </content>
+        </Panel>
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region" expandable="true"
+               expanded="true">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="집계데이터 갱신 주기 정보"/>
+                    <ToolbarSpacer/>
+                    <!-- <Button icon="sap-icon://search" text="검색" type="Reject"/> -->
+                </OverflowToolbar>
+            </headerToolbar>
+            <content>
+                <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+                                 labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false"
+                                 emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+                                 columnsL="2" columnsM="1" singleContainerFullSize="false">
+                    <form:content>
+                        <!--                                    <Label text="갱신여부"/>-->
+                        <!--                                    <CheckBox text="체크 안할 경우 저장시 최초 한번만 동기화 됩니다. " selected="{=${/segment/batchInfo/cycleYn} === 'true' ? true : false}" />-->
+                        <Label text="갱신 단위"/>
+                        <RadioButtonGroup selectedIndex="-1" columns="4" width="100%" class="">
+                            <RadioButton text="일단위"/>
+                            <!--                                        <RadioButton text="주단위"/>-->
+                            <!--                                        <RadioButton text="월단위"/>-->
+                        </RadioButtonGroup>
+                        <Label text="갱신 주기"/>
+                        <ComboBox items="{/periodTypeDDLB}" selectedKey="one">
+                            <core:Item key="{key}" text="{text}"/>
+                        </ComboBox>
+                        <Label text="갱신 시작 일시"/>
+                        <DateTimePicker width="200px" enabled="true"
+                                        class="sapUiSmallMarginBottom"
+                                        valueFormat="yyyy-MM-dd HH:mm"
+                                        displayFormat="yyyy-MM-dd HH:mm"
+                                        value="{/segment/batchInfo/cycleStartDatetime}"/>
+                        <Label text="데이터 저장 위치"/>
+                        <CheckBox text="고객 마스터 DB Table"
+                                  selected="{=${/segment/batchInfo/saveDbYn} === 'Y' ? true : false}"/>
+                        <CheckBox text="Braze 고객 속성 업데이트"
+                                  selected="{=${/segment/batchInfo/saveBrazeYn} === 'Y' ? true : false}"/>
+                    </form:content>
+                </form:SimpleForm>
+            </content>
+        </Panel>
+    </Page>
+
+</mvc:View>

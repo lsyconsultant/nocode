@@ -1,0 +1,111 @@
+{
+  "_version": "1.0.0",
+  "sap.app": {
+    "id": "sap.ui.nocode",
+    "type": "application",
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "supportedLocales": [
+        ""
+      ],
+      "fallbackLocale": ""
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "sap.ui.nocode.view.framework.App",
+      "type": "XML",
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.96.3",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {}
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "sap.ui.nocode.view",
+        "controlId": "NavContainer",
+        "controlAggregation": "pages",
+        "transition": "fade",
+        "bypassed": {
+          "target": "notFound"
+        }
+      },
+      "routes": {
+        "home": {
+          "pattern": "",
+          "target": "dashboard"
+        },
+        "login": {
+          "pattern": "login",
+          "target": "login"
+        },
+        "dashboard": {
+          "pattern": "dashboard",
+          "target": "dashboard"
+        },
+        "campaignList": {
+          "pattern": "campaignList",
+          "target": "campaignList"
+        },
+        "campaignCreate": {
+          "pattern": "campaignCreate",
+          "target": "campaignCreate"
+        },
+        "segmentList": {
+          "pattern": "segmentList",
+          "target": "segmentList"
+        },
+        "segmentCreate": {
+          "pattern": "segmentCreate",
+          "target": "segmentCreate"
+        }
+      },
+      "targets": {
+        "login": {
+          "id": "App",
+          "name": "framework.App"
+        },
+        "dashboard": {
+          "id": "dashboard",
+          "name": "dashboard.dashboard"
+        },
+        "campaignList": {
+          "id": "campaignList",
+          "name": "campaign.campaignList"
+        },
+        "campaignCreate": {
+          "id": "campaignCreate",
+          "name": "campaign.campaignCreate"
+        },
+        "segmentList": {
+          "id": "segmentList",
+          "name": "segment.segmentList"
+        },
+        "segmentCreate": {
+          "id": "segmentCreate",
+          "name": "segment.segmentCreate"
+        }
+      }
+    }
+  }
+}
