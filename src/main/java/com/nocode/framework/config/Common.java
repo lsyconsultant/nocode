@@ -12,7 +12,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Properties;
 
-@Slf4j
+
 public class Common {
     private static Common instance;
     private Properties servletProp;
@@ -71,11 +71,11 @@ public class Common {
                         }
                     } while (e1);
                 } catch (SocketException var15) {
-                    log.error(var15.getMessage());
+                   // log.error(var15.getMessage());
                 }
             }
 
-            log.info(">>>>>>>>>>>>>>>>> Current IP : " + e + " <<<<<<<<<<<<<<<<<<<<<<<<");
+            //log.info(">>>>>>>>>>>>>>>>> Current IP : " + e + " <<<<<<<<<<<<<<<<<<<<<<<<");
             this.setCurrentIP(e);
             if (this.getDevIp() != null && this.getDevIp().indexOf(e) > -1) {
                 this.servletProp = null;
@@ -99,9 +99,9 @@ public class Common {
                 this.serverType = Common.SERVER_TYPE.Real;
             }
 
-            log.info(">>>>>>>>>>>>>>>>> Current Server Type : " + this.serverType.toString() + " <<<<<<<<<<<<<<<<<<<<<<<<");
+           // log.info(">>>>>>>>>>>>>>>>> Current Server Type : " + this.serverType.toString() + " <<<<<<<<<<<<<<<<<<<<<<<<");
         } catch (IOException var16) {
-            log.error(var16.getMessage());
+            //log.error(var16.getMessage());
         }
 
     }
