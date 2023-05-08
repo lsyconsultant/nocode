@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (Controller, MessageToast, JSONModel) {
     "use strict";
 
-    return Controller.extend("sap.ui.eland.controller.framework.App", {
+    return Controller.extend("sap.ui.nocode.controller.framework.App", {
 
         onInit: function () {
             // debugger;
@@ -16,65 +16,23 @@ sap.ui.define([
             this.getView().setModel(oModel);
             console.log(this.getView().getModel().getProperty("/memberId"))
         },
-        onItemSelect: function (event) {
-            const selectedItem = event.getParameter("item");
-            const routeName = selectedItem.getKey();
-            this.getOwnerComponent().getRouter().navTo(routeName, {});
-        },
-        onShowHello: function () {
-            debugger;
-            // read msg from i18n model
-            var oBundle = this.getView().getModel("i18n").getResourceBundle();
-            var sRecipient = this.getView().getModel().getProperty("/recipient/name");
-            var sMsg = oBundle.getText("helloMsg", [sRecipient]);
-
-            // show message
-            MessageToast.show(sMsg);
-        },
-        onLogin() {
+        onProjectCreate(){
             var that = this;
             $.ajax({
                 type: "post",
-                url: "/login/login.do",
+                url: "/createProject.do",
                 data: {
-                    id: this.getView().getModel().getProperty("/id"),
-                    password: this.getView().getModel().getProperty("/password")
+                    projectId:this.getView().byId("projectId").getValue(),
+                    projectNm:this.getView().byId("projectNm").getValue()
                 },
                 cache: false,
                 async: false,
                 dataType: "json",
                 success: function (result) {
-
-                    MessageToast.show(result.resultMsg);
-                    if (result.resultCd === 'true') {
-                        sap.m.URLHelper.redirect("/", false);
-                    }
-
+                    console.log(JSON.stringify(result));
                 },
                 error: function (data) {
-                    console.log(data.error().responseText);
-                }
-            });
-        },
-        onLogout(){
-            var that = this;
-            $.ajax({
-                type: "post",
-                url: "/login/loginout.do",
-                data: {},
-                cache: false,
-                async: false,
-                dataType: "json",
-                success: function (result) {
-
-                    MessageToast.show(result.resultMsg);
-                    if (result.resultCd === 'true') {
-                        sap.m.URLHelper.redirect("/", false);
-                    }
-
-                },
-                error: function (data) {
-                    console.log(data.error().responseText);
+                    console.log(data);
                 }
             });
         }
