@@ -23,7 +23,8 @@ sap.ui.define([
                 url: "/createProject.do",
                 data: {
                     projectId:this.getView().byId("projectId").getValue(),
-                    projectNm:this.getView().byId("projectNm").getValue()
+                    projectNm:this.getView().byId("projectNm").getValue(),
+                    projectPath:this.getView().byId("projectPath").getValue()
                 },
                 cache: false,
                 async: false,
