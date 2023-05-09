@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="framework">
+
+<!--    <insert id="createCampaign" parameterType="com.eland.campaign.dto.CampaignBasicInfoDTO">-->
+<!--        insert into eland_braze.ztcam_h-->
+<!--        set id              = #{id},-->
+<!--            name            = #{name},-->
+<!--            status          = #{status},-->
+<!--            startDate       = #{startDate},-->
+<!--            endDate         = #{endDate},-->
+<!--            `desc`          = #{desc},-->
+<!--            createDatetime  = #{createDatetime},-->
+<!--            createBy        = #{createBy}-->
+<!--    </insert>-->
+<!--    <update id="updateCampaignTypeInfo" parameterType="com.eland.campaign.dto.CampaignTypeInfoDTO">-->
+<!--        update eland_braze.ztcam_h-->
+<!--           set type         = #{type},-->
+<!--               detailType   = #{detailType},-->
+<!--               cycleType    = #{cycleType},-->
+<!--               cyclePeriod  = #{cyclePeriod},-->
+<!--               sendDatetime = #{sendDatetime}-->
+<!--         where id           = #{campaignId}-->
+
+
+<!--    </update>-->
+
+</mapper>

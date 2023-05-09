@@ -12,15 +12,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-//@Repository
+@Repository
 public class BaseDAO {
 
-//    @Autowired
-//    @Qualifier(value = "sqlSessionTemplate")
+    @Autowired
+    @Qualifier(value = "sqlSessionTemplate")
     private SqlSessionTemplate sqlSession;
 
-//    @Autowired
-//    @Qualifier(value = "transactionManager")
+    @Autowired
+    @Qualifier(value = "transactionManager")
     private DataSourceTransactionManager transactionManager;
 
     private DefaultTransactionDefinition def;
