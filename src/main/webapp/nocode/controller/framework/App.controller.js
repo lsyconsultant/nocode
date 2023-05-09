@@ -17,7 +17,7 @@ sap.ui.define([
             console.log(this.getView().getModel().getProperty("/memberId"))
         },
         onProjectCreate(){
-            //로그 추가   -----
+            //로그 추가   ----- 더ㅓ허허ㅗ허ㅗㅓㅗㅓ
             var that = this;
             $.ajax({
                 type: "post",
