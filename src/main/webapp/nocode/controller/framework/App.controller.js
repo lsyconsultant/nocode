@@ -17,13 +17,15 @@ sap.ui.define([
             console.log(this.getView().getModel().getProperty("/memberId"))
         },
         onProjectCreate(){
+            //로그 추가   -----
             var that = this;
             $.ajax({
                 type: "post",
                 url: "/createProject.do",
                 data: {
                     projectId:this.getView().byId("projectId").getValue(),
-                    projectNm:this.getView().byId("projectNm").getValue()
+                    projectNm:this.getView().byId("projectNm").getValue(),
+                    projectPath:this.getView().byId("projectPath").getValue(),
                 },
                 cache: false,
                 async: false,

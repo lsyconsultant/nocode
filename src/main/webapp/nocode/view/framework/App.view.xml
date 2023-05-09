@@ -83,6 +83,11 @@
                                                 <Input id="projectNm" />
                                             </f:fields>
                                         </f:FormElement>
+                                        <f:FormElement label="프로젝트 생성 위치">
+                                            <f:fields>
+                                                <Input id="projectPath" />
+                                            </f:fields>
+                                        </f:FormElement>
                                     </f:formElements>
                                 </f:FormContainer>
                             </f:formContainers>

@@ -13,8 +13,13 @@ public class BaseController {
     public @ResponseBody String createProject(HttpServletRequest req){
         System.out.println("프로젝트 ID : " + req.getParameter("projectId"));
         System.out.println("프로젝트 이름 : " + req.getParameter("projectNm"));
-        
-        // 테스트 
+//<<<<<<< HEAD
+//        
+//        // 테스트 
+//=======
+//
+//        //수용 로그 남김
+//>>>>>>> refs/remotes/origin/master
         return "성공1234";
     }
 }
