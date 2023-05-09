@@ -14,12 +14,7 @@ public class BaseController {
         System.out.println("프로젝트 ID : " + req.getParameter("projectId"));
         System.out.println("프로젝트 이름 : " + req.getParameter("projectNm"));
 //<<<<<<< HEAD
-////<<<<<<< HEAD 1234
-//
-//=======
-// 
-//        //ㅇㅇㅇㅇㄹㄴㅇㄹㄴㅇㄹ
-//>>>>>>> refs/remotes/origin/master
+        //여기다가 수정함
         return "성공1234";
     }
 }
