@@ -49,7 +49,12 @@ public class BaseDAO {
     public Object queryForOne(String id, Object param) {
         Object result = null;
 
-        result = sqlSession.selectOne(id, param);
+        try{
+            result = sqlSession.selectOne(id, param);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         return result;
     }

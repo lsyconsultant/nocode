@@ -10,34 +10,65 @@ sap.ui.define([
         onInit: function () {
             // debugger;
             var oData = {
-                loginStatus : this.getOwnerComponent().getModel().getProperty("/loginStatus")
+                loginStatus: this.getOwnerComponent().getModel().getProperty("/loginStatus")
             };
             var oModel = new JSONModel(oData);
             this.getView().setModel(oModel);
             console.log(this.getView().getModel().getProperty("/memberId"))
         },
-        onProjectCreate(){
-            //로그 추가   ----- 더ㅓ허허ㅗ허ㅗㅓㅗㅓ
+        onItemSelect: function (event) {
+            const selectedItem = event.getParameter("item");
+            const routeName = selectedItem.getKey();
+            this.getOwnerComponent().getRouter().navTo(routeName, {});
+        },
+        onLogin() {
             var that = this;
             $.ajax({
                 type: "post",
-                url: "/createProject.do",
+                url: "/login/login.do",
                 data: {
-                    projectId:this.getView().byId("projectId").getValue(),
-                    projectNm:this.getView().byId("projectNm").getValue(),
-                    projectPath:this.getView().byId("projectPath").getValue(),
+                    id: this.getView().getModel().getProperty("/id"),
+                    password: this.getView().getModel().getProperty("/password")
                 },
                 cache: false,
                 async: false,
                 dataType: "json",
                 success: function (result) {
-                    console.log(JSON.stringify(result));
+
+                    MessageToast.show(result.resultMsg);
+                    if (result.resultCd === 'true') {
+                        sap.m.URLHelper.redirect("/", false);
+                    }
+
                 },
                 error: function (data) {
-                    console.log(data);
+                    console.log(data.error().responseText);
+                }
+            });
+        },
+        onLogout() {
+            var that = this;
+            $.ajax({
+                type: "post",
+                url: "/login/loginout.do",
+                data: {},
+                cache: false,
+                async: false,
+                dataType: "json",
+                success: function (result) {
+
+                    MessageToast.show(result.resultMsg);
+                    if (result.resultCd === 'true') {
+                        sap.m.URLHelper.redirect("/", false);
+                    }
+
+                },
+                error: function (data) {
+                    console.log(data.error().responseText);
                 }
             });
         }
+
     });
 
 });

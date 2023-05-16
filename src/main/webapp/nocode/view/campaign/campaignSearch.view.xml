@@ -1,0 +1,77 @@
+<mvc:View
+        controllerName="sap.ui.nocode.controller.campaign.campaignSearch"
+        xmlns="sap.m"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:tnt="sap.tnt"
+        xmlns:f="sap.ui.layout.form"
+        xmlns:core="sap.ui.core"
+        xmlns:t="sap.ui.table">
+
+    <Panel width="auto" class="sapUiResponsiveMargin" expandable="true" expanded="true">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Title text="검색 조건"/>
+            </OverflowToolbar>
+        </headerToolbar>
+        <content>
+            <VBox>
+                <SearchField id="searchText" width="500px"/>
+            </VBox>
+        </content>
+    </Panel>
+    <Panel width="auto" class="sapUiResponsiveMargin" expandable="true" expanded="true">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Title text="조회 결과"/>
+                <ToolbarSpacer/>
+                <Button text="신규" press="onNewCampaign" type="Emphasized"/>
+            </OverflowToolbar>
+        </headerToolbar>
+        <content>
+            <t:Table rows="{/data}" visibleRowCount="13"
+                     selectionMode="None" class="sapUiSizeCompact">
+                <t:columns>
+                    <t:Column width="auto">
+                        <Label text="캠페인 ID"/>
+                        <t:template>
+                            <Text text="{campaignId}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="캠페인 명"/>
+                        <t:template>
+                            <Text text="{campaignNm}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="상태"/>
+                        <t:template>
+                            <Text text="{status}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="유형"/>
+                        <t:template>
+                            <Text text="{type}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="생성일"/>
+                        <t:template>
+                            <Text text="{createDatetime}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="생성자"/>
+                        <t:template>
+                            <Text text="{createBy}"/>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+
+        </content>
+    </Panel>
+
+
+</mvc:View>

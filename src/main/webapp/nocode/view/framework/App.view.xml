@@ -24,11 +24,9 @@
                         expanded="true"
                         itemSelect=".onItemSelect">
                     <tnt:NavigationList>
-                        <tnt:NavigationListItem text="대쉬보드(대기)" key="dashboard"/>
-                        <tnt:NavigationListItem text="세그먼트 리스트(완료)" key="segmentList"/>
-<!--                        <tnt:NavigationListItem text="세그먼트 생성(진행중)" key="segmentCreate"/>-->
-                        <tnt:NavigationListItem text="캠페인 리스트(대기)" key="campaignList"/>
-                        <tnt:NavigationListItem text="캠페인 생성(대기)" key="campaignCreate"/>
+                        <tnt:NavigationListItem text="프로젝트 초기 설정" key="projectSetting"/>
+                        <tnt:NavigationListItem text="비즈니스 설정" key="businessSetting"/>
+                        <tnt:NavigationListItem text="캠페인 조회" key="campaignSearch"/>
                     </tnt:NavigationList>
                 </tnt:SideNavigation>
             </tnt:sideContent>
@@ -48,51 +46,11 @@
         <pages>
             <Page showHeader="false">
                 <content>
-                    <VBox justifyContent="Center" alignItems="Center" height="500px"  width="100%">
-                        <f:Form id="FormDisplay354"
-                                editable="false">
-                            <f:title>
-                                <core:Title text="노코드 플렛폼 시작을 환영합니다. 화아팅!!!" />
-                            </f:title>
-                            <f:layout>
-                                <f:ResponsiveGridLayout
-                                        labelSpanXL="3"
-                                        labelSpanL="3"
-                                        labelSpanM="3"
-                                        labelSpanS="12"
-                                        adjustLabelSpan="false"
-                                        emptySpanXL="4"
-                                        emptySpanL="4"
-                                        emptySpanM="4"
-                                        emptySpanS="0"
-                                        columnsXL="1"
-                                        columnsL="1"
-                                        columnsM="1"
-                                        singleContainerFullSize="false" />
-                            </f:layout>
-                            <f:formContainers>
-                                <f:FormContainer>
-                                    <f:formElements>
-                                        <f:FormElement label="프로젝트 Id">
-                                            <f:fields>
-                                                <Input id="projectId" />
-                                            </f:fields>
-                                        </f:FormElement>
-                                        <f:FormElement label="프로젝트 이름">
-                                            <f:fields>
-                                                <Input id="projectNm" />
-                                            </f:fields>
-                                        </f:FormElement>
-                                        <f:FormElement label="프로젝트 생성 위치">
-                                            <f:fields>
-                                                <Input id="projectPath" />
-                                            </f:fields>
-                                        </f:FormElement>
-                                    </f:formElements>
-                                </f:FormContainer>
-                            </f:formContainers>
-                        </f:Form>
-                        <Button text="생성" type="Emphasized" press="onProjectCreate"/>
+                    <VBox justifyContent="Center" alignItems="Center" height="500px" >
+                        <Title titleStyle="H2" text="Login" />
+                        <Input value="{/id}" placeholder="id" />
+                        <Input type="Password" value="{/password}"  placeholder="password" />
+                        <Button text="로그인" press="onLogin" type="Emphasized"/>
                     </VBox>
                 </content>
             </Page>

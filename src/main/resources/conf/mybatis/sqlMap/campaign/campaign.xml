@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="campaign">
+
+    <insert id="createCampaign" parameterType="com.nocode.campaign.dto.CampaignDTO">
+        insert into nocode.campaign
+        set campaignId      = #{campaignId},
+            campaignNm = #{campaignNm},
+            status = #{status},
+            createDatetime = #{createDatetime},
+            createBy = #{createBy},
+            modifyDatetime = #{modifyDatetime},
+            modifyBy = #{modifyBy}
+    </insert>
+    <select id="getCampaignDetail" parameterType="com.nocode.campaign.dto.CampaignDTO" resultType="com.nocode.campaign.dto.CampaignDTO">
+        select *
+          from nocode.campaign
+         where campaignId = #{campaignId}
+    </select>
+    <select id="getCampaignList" parameterType="com.nocode.campaign.dto.CampaignDTO" resultType="com.nocode.campaign.dto.CampaignDTO">
+        select *
+        from nocode.campaign
+    </select>
+
+</mapper>

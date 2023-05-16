@@ -53,31 +53,23 @@
       "routes": {
         "home": {
           "pattern": "",
-          "target": "dashboard"
+          "target": "projectSetting"
         },
         "login": {
           "pattern": "login",
           "target": "login"
         },
-        "dashboard": {
-          "pattern": "dashboard",
-          "target": "dashboard"
+        "businessSetting": {
+          "pattern": "businessSetting",
+          "target": "businessSetting"
         },
-        "campaignList": {
-          "pattern": "campaignList",
-          "target": "campaignList"
+        "campaignSearch": {
+          "pattern": "campaignSearch",
+          "target": "campaignSearch"
         },
-        "campaignCreate": {
-          "pattern": "campaignCreate",
-          "target": "campaignCreate"
-        },
-        "segmentList": {
-          "pattern": "segmentList",
-          "target": "segmentList"
-        },
-        "segmentCreate": {
-          "pattern": "segmentCreate",
-          "target": "segmentCreate"
+        "campaignDetail": {
+          "pattern": "campaignDetail/{campaignId}",
+          "target": "campaignDetail"
         }
       },
       "targets": {
@@ -85,25 +77,21 @@
           "id": "App",
           "name": "framework.App"
         },
-        "dashboard": {
-          "id": "dashboard",
-          "name": "dashboard.dashboard"
+        "projectSetting": {
+          "id": "projectSetting",
+          "name": "framework.projectSetting"
         },
-        "campaignList": {
-          "id": "campaignList",
-          "name": "campaign.campaignList"
+        "businessSetting": {
+          "id": "businessSetting",
+          "name": "framework.businessSetting"
         },
-        "campaignCreate": {
-          "id": "campaignCreate",
-          "name": "campaign.campaignCreate"
+        "campaignSearch": {
+          "id": "campaignSearch",
+          "name": "campaign.campaignSearch"
         },
-        "segmentList": {
-          "id": "segmentList",
-          "name": "segment.segmentList"
-        },
-        "segmentCreate": {
-          "id": "segmentCreate",
-          "name": "segment.segmentCreate"
+        "campaignDetail": {
+          "id": "campaignDetail",
+          "name": "campaign.campaignDetail"
         }
       }
     }
