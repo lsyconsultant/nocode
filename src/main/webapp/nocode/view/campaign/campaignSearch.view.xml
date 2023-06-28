@@ -24,7 +24,7 @@
             <OverflowToolbar>
                 <Title text="조회 결과"/>
                 <ToolbarSpacer/>
-                <Button text="신규" press="onNewCampaign" type="Emphasized"/>
+                <Button text="신규" press="onNewBo" type="Emphasized"/>
             </OverflowToolbar>
         </headerToolbar>
         <content>
@@ -34,7 +34,7 @@
                     <t:Column width="auto">
                         <Label text="캠페인 ID"/>
                         <t:template>
-                            <Text text="{campaignId}"/>
+                            <Link text="{campaignId}" press="onGoToDetail"/>
                         </t:template>
                     </t:Column>
                     <t:Column width="auto">

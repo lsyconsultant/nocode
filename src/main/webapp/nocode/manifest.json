@@ -70,6 +70,10 @@
         "campaignDetail": {
           "pattern": "campaignDetail/{campaignId}",
           "target": "campaignDetail"
+        },
+        "campaignCreate": {
+          "pattern": "campaignCreate",
+          "target": "campaignCreate"
         }
       },
       "targets": {
@@ -92,6 +96,10 @@
         "campaignDetail": {
           "id": "campaignDetail",
           "name": "campaign.campaignDetail"
+        },
+        "campaignCreate": {
+          "id": "campaignCreate",
+          "name": "campaign.campaignCreate"
         }
       }
     }

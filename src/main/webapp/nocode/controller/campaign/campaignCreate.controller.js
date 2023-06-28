@@ -5,11 +5,11 @@ sap.ui.define([
 ], function (Controller, MessageToast, JSONModel) {
     "use strict";
 
-    return Controller.extend("sap.ui.nocode.controller.campaign.campaignSearch", {
+    return Controller.extend("sap.ui.nocode.controller.campaign.campaignCreate", {
 
         onInit: function () {
             var oData = {
-                loginStatus: this.getOwnerComponent().getModel().getProperty("/loginStatus")
+                loginStatus: this.getOwnerComponent().getModel().getProperty("/loginStatus"),
             };
             var oModel = new JSONModel(oData);
             this.getView().setModel(oModel);
@@ -20,43 +20,38 @@ sap.ui.define([
                 this.getView().getModel().setProperty("/currentRoute", routeName);
                 this.getView().getModel().setProperty("/currentRouteArguments", oEvent.getParameter("arguments"));
 
-                if (routeName === "campaignSearch") {
-                    this.getBoList();
+                if (routeName === "campaignCreate") {
+
                 }
 
             }.bind(this));
 
         },
-        onNewBo(event){
-            this.getOwnerComponent().getRouter().navTo("campaignCreate", {});
-        },
-        getBoList(event){
+        onSave(event){
             var that = this;
             $.ajax({
-                type: "get",
-                url: "/campaign/getCampaignList.do",
-                data: {},
+                type: "post",
+                url: "/campaign/campaignCreate.do",
+                data: JSON.stringify({
+                    campaignNm:this.getView().getModel().getProperty("/data/campaignNm")
+                }),
                 cache: false,
-                async: true,
+                async: false,
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 success: function (result) {
-                    that.getView().getModel().setProperty("/data", result)
+                    MessageToast.show(result.resultMsg);
+                    if(result.resultCd === 'S'){
+                        this.getOwnerComponent().getRouter().navTo("campaignDetail", {campaignId:result.data.campaignId});
+                    }
                 },
                 error: function (data) {
                     console.log(data);
                 }
             });
-        },
-        onGoToDetail(event) {
-            this.getOwnerComponent().getRouter()
-                .navTo(
-                    "campaignDetail",
-                    {
-                        campaignId: event.getSource().getBindingContext().getProperty("campaignId")
-                    }
-                );
         }
-
-
+        
 
     });
 
