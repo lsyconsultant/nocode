@@ -3,7 +3,7 @@ package com.nocode.campaign.service;
 
 import com.nocode.campaign.dao.CampaignDAO;
 import com.nocode.campaign.dto.CampaignDTO;
-import com.nocode.framework.dto.ResponseDTO;
+import com.nocode.framework.base.dto.ResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

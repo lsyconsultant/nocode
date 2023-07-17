@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Power BI Embedded</title>
+    <script src="https://microsoft.github.io/PowerBI-JavaScript/demo/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://microsoft.github.io/PowerBI-JavaScript/demo/node_modules/powerbi-client/dist/powerbi.js"></script>
+</head>
+
+<body>
+<div id="reportContainer" style="height: 600px;"></div>
+
+<script>
+    window.onload = function () {
+        var embedConfiguration = {
+            type: 'report',
+            // tokenType: powerbi.models.TokenType.Embed,
+            accessToken: 'eyJ0eXAiOiJKV1QiLCJub25jZSI6IlV2TFBRLWZCaG96SmVqY2dvd2ZrUm5ZbzlUUmd3ZV9KVUl6VGRPZVF4b0UiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNzdkZjUxMTQtN2UxYy00YWYwLTgxMjUtZTRlNTIyMGE1NzhkLyIsImlhdCI6MTY4OTMxNjQyMywibmJmIjoxNjg5MzE2NDIzLCJleHAiOjE2ODkzMjAzMjMsImFpbyI6IkUyWmdZSEJJZFoyZFh5VER0VHZ2ZG9yVmliaE5BQT09IiwiYXBwX2Rpc3BsYXluYW1lIjoi7Jis66a87ZG47IqkIiwiYXBwaWQiOiI4ZGM2MjE1OC05OWJmLTRmZTAtOWFjYy1lOTdjZWExNjc4MjIiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83N2RmNTExNC03ZTFjLTRhZjAtODEyNS1lNGU1MjIwYTU3OGQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI1OTBiZDUxZC1hMDFjLTQ3OTktYjhjZS03MTMxM2YwNzgzMzMiLCJyaCI6IjAuQVVvQUZGSGZkeHgtOEVxQkplVGxJZ3BYalFNQUFBQUFBQUFBd0FBQUFBQUFBQUNKQUFBLiIsInJvbGVzIjpbIkZpbGVzLlJlYWRXcml0ZS5BbGwiLCJCcm93c2VyU2l0ZUxpc3RzLlJlYWRXcml0ZS5BbGwiLCJTaXRlcy5GdWxsQ29udHJvbC5BbGwiXSwic3ViIjoiNTkwYmQ1MWQtYTAxYy00Nzk5LWI4Y2UtNzEzMTNmMDc4MzMzIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkFTIiwidGlkIjoiNzdkZjUxMTQtN2UxYy00YWYwLTgxMjUtZTRlNTIyMGE1NzhkIiwidXRpIjoiZmZ3aTdaMnYzVS1oeFFGOHVFTU1BQSIsInZlciI6IjEuMCIsIndpZHMiOlsiMDk5N2ExZDAtMGQxZC00YWNiLWI0MDgtZDVjYTczMTIxZTkwIl0sInhtc190Y2R0IjoxNjg0MTA5ODc3fQ.FecE-d7oG_N9pP6u3_M95ONfxSxTbNdBd1hvaWXf6tshJFNKsezZ5F1bQiQ0Hon17t6swwyra_U-6bJOq_nwVZ3m4S0rXdm9NfL4dnAnJcJdYRoUjxEWw0DS6iVS1P7lVW8RA45V4NRplqk9gmeyEL8-Q_y4pViK0XO5_k3SUSqPp6iRLCJ3nJ_MLFZEba3dZC-X1hvdnVY9cWZT9h5v0Bnpzcl3ryk2gDBVNVbIhS5OZIJjaSkFepabPkoyj4RZs7BXx4qmDpNp8vUYKQRufN3wCVhwn6KaXzRm2gTQHmK9cHj_WhA4GnwRtYb989VRU0vIrVHEjG--jk2iUYnlhg',
+            embedUrl: 'https://app.powerbi.com/reportEmbed?reportId=b7bef992-8690-4de5-8e4d-5402a54cfba7&autoAuth=true&ctid=77df5114-7e1c-4af0-8125-e4e5220a578d',
+            id: '70964473-911c-44ee-986c-e0946c8bf667',
+            settings: {
+                filterPaneEnabled: true,
+                navContentPaneEnabled: true
+            }
+        };
+
+        // Power BI 보고서를 로드합니다.
+        var reportContainer = $('#reportContainer')[0];
+        var report = powerbi.embed(reportContainer, embedConfiguration);
+
+        // 필터를 적용합니다.
+        report.on("loaded", function () {
+            report.setFilters([
+                {
+                    $schema: "http://powerbi.com/product/schema#advanced",
+                    target: {
+                        table: "Sales",
+                        column: "Region"
+                    },
+                    operator: "In",
+                    values: ["West", "South"]
+                }
+            ]);
+        });
+    };
+</script>
+</body>
+
+</html>

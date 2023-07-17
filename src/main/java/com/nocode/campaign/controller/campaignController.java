@@ -3,17 +3,14 @@ package com.nocode.campaign.controller;
 
 import com.nocode.campaign.dto.CampaignDTO;
 import com.nocode.campaign.service.CampaignService;
-import com.nocode.framework.dto.ResponseDTO;
+import com.nocode.framework.base.dto.ResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Controller

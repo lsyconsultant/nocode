@@ -14,7 +14,7 @@
                 <tnt:ToolHeader>
                     <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent"
                             press=".onSideNavButtonPress"/>
-                    <Button text="EICS" class="logoStyle" type="Transparent" press="onGotoHome"/>
+                    <Button text="Nocode" class="logoStyle" type="Transparent" press="onGotoHome"/>
                     <ToolbarSpacer/>
                     <Button id="userButton" text="로그아웃" type="Transparent" press="onLogout"/>
                 </tnt:ToolHeader>
@@ -24,8 +24,8 @@
                         expanded="true"
                         itemSelect=".onItemSelect">
                     <tnt:NavigationList>
+                        <tnt:NavigationListItem text="비즈니스 관리(진행중)" key="BoManage"/>
                         <tnt:NavigationListItem text="프로젝트 초기 설정" key="projectSetting"/>
-                        <tnt:NavigationListItem text="비즈니스 설정" key="businessSetting"/>
                         <tnt:NavigationListItem text="캠페인 조회" key="campaignSearch"/>
                     </tnt:NavigationList>
                 </tnt:SideNavigation>

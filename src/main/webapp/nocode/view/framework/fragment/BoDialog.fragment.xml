@@ -1,0 +1,147 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+        xmlns:f="sap.f"
+        xmlns:form="sap.ui.layout.form"
+        xmlns:t="sap.ui.table"
+>
+    <Dialog
+            id="wizardDialog"
+            showHeader="false"
+            verticalScrolling="false"
+            contentHeight="100%"
+            contentWidth="100%">
+        <f:DynamicPage
+                stickySubheaderProvider="CreateProductWizard"
+                toggleHeaderOnTitleClick="false"
+                class="sapUiNoContentPadding"
+                showFooter="true">
+            <f:title>
+                <f:DynamicPageTitle>
+                    <f:heading>
+                        <Title text="신규 비즈니스 등록"/>
+                    </f:heading>
+                </f:DynamicPageTitle>
+            </f:title>
+            <f:content>
+                <Wizard id="BoWizard"
+                        class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+                        showNextButton="false"
+                        renderMode="Page">
+                    <WizardStep id="step1" title="기본 정보 등록">
+                        <MessageStrip class="sapUiSmallMarginBottom"
+                                      text="신규로 등록하실 비즈니스 ID,이름, 설명을 등록해주세요."
+                                      showIcon="true"/>
+
+                        <form:SimpleForm editable="true"
+                                         layout="ResponsiveGridLayout"
+                                         title=""
+                                         labelSpanXL="3"
+                                         labelSpanL="3"
+                                         labelSpanM="3"
+                                         labelSpanS="12"
+                                         adjustLabelSpan="false"
+                                         emptySpanXL="4"
+                                         emptySpanL="4"
+                                         emptySpanM="4"
+                                         emptySpanS="0"
+                                         columnsXL="1"
+                                         columnsL="1"
+                                         columnsM="1"
+                                         singleContainerFullSize="false">
+                            <form:content>
+                                <Label text="ID"/>
+                                <Input id="id" value="{SupplierName}"/>
+                                <Button text="중복체크" type="Emphasized"/>
+                                <Label text="이름"/>
+                                <Input value="{Street}"/>
+                                <Button text="중복체크" type="Emphasized"/>
+                                <Label text="설명"/>
+                                <TextArea value="{Street}" growing="true"/>
+                            </form:content>
+                        </form:SimpleForm>
+                    </WizardStep>
+                    <WizardStep id="step2" title="비즈니스 속성 등록">
+                        <MessageStrip class="sapUiSmallMarginBottom"
+                                      text="비즈니스에 필요한 속성들을 정의해주세요."
+                                      showIcon="true"/>
+
+                        <t:Table id="boAttributeTable" rows="{/boWizard/attributeList}" visibleRowCount="1">
+                            <t:extension>
+                                <OverflowToolbar style="Clear">
+                                    <ToolbarSpacer/>
+                                    <Button text="속성 추가" type="Emphasized" press="onBoAttributeAdd"/>
+                                </OverflowToolbar>
+                            </t:extension>
+                            <t:columns>
+                                <t:Column>
+                                    <Label text="id"/>
+                                    <t:template>
+                                        <Input value="{id}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column>
+                                    <Label text="이름"/>
+                                    <t:template>
+                                        <Input value="{name}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column>
+                                    <Label text="Key"/>
+                                    <t:template>
+                                        <CheckBox selected="{key}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column>
+                                    <Label text="유형"/>
+                                    <t:template>
+                                        <Select forceSelection="false" selectedKey="{type}" width="100%">
+                                            <core:Item key="varchar" text="문자" />
+                                            <core:Item key="int" text="정수" />
+                                            <core:Item key="float" text="실수" />
+                                            <core:Item key="longtext" text="긴문자" />
+                                            <core:Item key="datetime" text="날짜" />
+                                        </Select>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column>
+                                    <Label text="길이"/>
+                                    <t:template>
+                                        <Input value="{length}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column>
+                                    <Label text="소수자리"/>
+                                    <t:template>
+                                        <Input value="{point}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column>
+                                    <Label text="설명"/>
+                                    <t:template>
+                                        <Input value="{Name}"/>
+                                    </t:template>
+                                </t:Column>
+                            </t:columns>
+                        </t:Table>
+                    </WizardStep>
+
+                </Wizard>
+            </f:content>
+
+            <f:footer>
+                <OverflowToolbar>
+                    <ToolbarSpacer/>
+                    <Button text="이전" visible="{/boWizard/buttonVisible/previous}" type="Transparent"
+                            press="onBoDialogPreviousButton"/>
+                    <Button text="다음" visible="{/boWizard/buttonVisible/next}" type="Emphasized"
+                            press="onBoDialogNextButton"/>
+                    <Button text="완료" visible="{/boWizard/buttonVisible/finish}" type="Emphasized"
+                            press="onBoDialogFinishButton"/>
+                    <Button text="취소" visible="{/boWizard/buttonVisible/cancel}" type="Transparent"
+                            press="onBoDialogCancelButton"/>
+                </OverflowToolbar>
+            </f:footer>
+        </f:DynamicPage>
+    </Dialog>
+</core:FragmentDefinition>

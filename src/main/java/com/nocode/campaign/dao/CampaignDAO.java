@@ -1,8 +1,8 @@
 package com.nocode.campaign.dao;
 
 import com.nocode.campaign.dto.CampaignDTO;
-import com.nocode.framework.dao.BaseDAO;
-import com.nocode.framework.dto.ResponseDTO;
+import com.nocode.framework.base.dao.BaseDAO;
+import com.nocode.framework.base.dto.ResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 

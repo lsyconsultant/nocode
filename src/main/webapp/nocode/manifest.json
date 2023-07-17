@@ -53,15 +53,15 @@
       "routes": {
         "home": {
           "pattern": "",
-          "target": "projectSetting"
+          "target": "BoManage"
         },
         "login": {
           "pattern": "login",
           "target": "login"
         },
-        "businessSetting": {
-          "pattern": "businessSetting",
-          "target": "businessSetting"
+        "BoManage": {
+          "pattern": "BoManage",
+          "target": "BoManage"
         },
         "campaignSearch": {
           "pattern": "campaignSearch",
@@ -85,9 +85,9 @@
           "id": "projectSetting",
           "name": "framework.projectSetting"
         },
-        "businessSetting": {
-          "id": "businessSetting",
-          "name": "framework.businessSetting"
+        "BoManage": {
+          "id": "BoManage",
+          "name": "framework.BoManage"
         },
         "campaignSearch": {
           "id": "campaignSearch",
