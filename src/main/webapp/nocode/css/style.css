@@ -1,3 +1,7 @@
-.SimpleForm1 h5{
+.SimpleForm1 h5 {
     display: none;
+}
+
+.Page1 {
+    background-color: #f5f6f7 !important;
 }

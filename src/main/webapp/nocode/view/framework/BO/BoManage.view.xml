@@ -1,5 +1,5 @@
 <mvc:View
-        controllerName="sap.ui.nocode.controller.framework.BoManage"
+        controllerName="sap.ui.nocode.controller.framework.BO.BoManage"
         xmlns="sap.m"
         xmlns:mvc="sap.ui.core.mvc"
         xmlns:tnt="sap.tnt"
@@ -25,13 +25,31 @@
                     <t:Column width="auto">
                         <Label text="비즈니스"/>
                         <t:template>
-                            <Text text="{cust_keyword}"/>
+                            <Link text="{name}" press="onGoToBoDetail"/>
                         </t:template>
                     </t:Column>
                     <t:Column width="auto">
-                        <Label text="상태"/>
+                        <Label text="Id"/>
                         <t:template>
-                            <Text text="{cust_keyword}"/>
+                            <Text text="{id}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="설명"/>
+                        <t:template>
+                            <Text text="{desc}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="생성일"/>
+                        <t:template>
+                            <Text text="{createDatetime}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="auto">
+                        <Label text="생성자"/>
+                        <t:template>
+                            <Text text="{createBy}"/>
                         </t:template>
                     </t:Column>
                 </t:columns>

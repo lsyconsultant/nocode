@@ -8,6 +8,7 @@
     <meta http-equiv="cache-control" content="no-store"/>
 
     <link rel="stylesheet" href="/nocode/css/style.css">
+    <link rel="stylesheet" href="/nocode/css/PanelStyle.css">
 
     <title>nocode</title>
 

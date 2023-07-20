@@ -59,7 +59,8 @@ public class DBConfig {
         Resource resources = resolver.getResource(sqlMapConfigPath);
 
         sqlSessionFactoryBean.setConfigLocation(resources);
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/conf/mybatis/sqlMap/**/*.xml"));
+        String dbType = Common.getInstance().getProp("spring.datasource.type");
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/conf/mybatis/sqlMap/"+dbType+"/**/*.xml"));
         sqlSessionFactoryBean.afterPropertiesSet();
 
         return sqlSessionFactoryBean.getObject();

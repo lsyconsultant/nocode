@@ -15,6 +15,33 @@ sap.ui.define([
             var oModel = new JSONModel(oData);
             this.getView().setModel(oModel);
             console.log(this.getView().getModel().getProperty("/memberId"))
+
+            this.getOwnerComponent().getRouter().attachRouteMatched(function (oEvent) {
+                var routeName = oEvent.getParameter("name");
+                this.getView().getModel().setProperty("/currentRoute", routeName);
+                this.getView().getModel().setProperty("/currentRouteArguments", oEvent.getParameter("arguments"));
+
+                if (routeName === "BoManage" || routeName === "home") {
+                    this.getBoList();
+                }
+
+            }.bind(this));
+
+        },
+        getBoList(){
+            var that = this;
+            $.ajax({
+                type: "get",
+                url: "/bo/getBoList.do",
+                cache: false,
+                async: true,
+                success: function (result) {
+                    that.getView().getModel().setProperty("/boList",result);
+                },
+                error: function (data) {
+                    console.log(data.error().responseText);
+                }
+            });
         },
         onNewBoPopup() {
             var oView = this.getView();
@@ -23,7 +50,7 @@ sap.ui.define([
             if (!this._BoWizrdDialog) {
                 this._BoWizrdDialog = Fragment.load({
                     id: oView.getId(),
-                    name: "sap.ui.nocode.view.framework.fragment.BoDialog",
+                    name: "sap.ui.nocode.view.framework.BO.fragment.BoDialog",
                     controller: this
                 }).then(function (oDialog) {
                     oDialog.attachAfterOpen(this.boWizardOnInit, this);
@@ -46,8 +73,10 @@ sap.ui.define([
         },
         boWizardOnInit() {
             var data = {
-                baseInfo: {},
-                attributeList: [],
+                id: "",
+                name: "",
+                desc: "",
+                attributes: [],
                 buttonVisible: {
                     previous: false,
                     next: false,
@@ -87,22 +116,25 @@ sap.ui.define([
             this.boWizardButtonVisibleHandle();
         },
         onBoDialogFinishButton(event) {
+            var data = this.getView().getModel().getProperty("/boWizard");
+            delete data.buttonVisible;
+            console.log(data);
+            // data = JSON.parse('{"id":"campaignBO","name":"캠페인BO","desc":"캠페인 BO 생성","attributes":[{"boId":"campaignBO","id":"id","name":"캠페인ID","key":true,"type":"varchar","length":"50","point":"","desc":"캠페인ID"},{"boId":"campaignBO","id":"name","name":"캠페인명","key":false,"type":"varchar","length":"255","point":"","desc":"캠페인명"},{"boId":"campaignBO","id":"status","name":"캠페인 상태","key":false,"type":"varchar","length":"10","point":"","desc":"open, rele, stop"}]}');
+
             var that = this;
             $.ajax({
                 type: "post",
-                url: "/login/login.do",
-                data: {
-                    id: this.getView().getModel().getProperty("/id"),
-                    password: this.getView().getModel().getProperty("/password")
-                },
+                url: "/bo/boCreate.do",
+                data: JSON.stringify(data),
                 cache: false,
                 async: false,
-                dataType: "json",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 success: function (result) {
-
                     MessageToast.show(result.resultMsg);
-                    if (result.resultCd === 'true') {
-                        sap.m.URLHelper.redirect("/", false);
+                    if (result.resultCd === 'S') {
+                        that.onBoDialogCancelButton();
                     }
 
                 },
@@ -110,11 +142,6 @@ sap.ui.define([
                     console.log(data.error().responseText);
                 }
             });
-
-
-
-
-            this.onBoDialogCancelButton();
         },
         onBoDialogCancelButton(event) {
             this._BoWizrdDialog.then(function (oDialog) {
@@ -122,9 +149,10 @@ sap.ui.define([
             }.bind(this))
         },
         onBoAttributeAdd() {
-            var attributeList = this.getView().getModel().getProperty("/boWizard/attributeList");
+            var attributes = this.getView().getModel().getProperty("/boWizard/attributes");
 
             var newData = {
+                boId: this.getView().getModel().getProperty("/boWizard/id"),
                 id: "",
                 name: "",
                 key: false,
@@ -133,15 +161,19 @@ sap.ui.define([
                 point: ""
             };
 
-            attributeList.push(newData);
-            this.getView().getModel().setProperty("/boWizard/attributeList", attributeList);
+            attributes.push(newData);
+            this.getView().getModel().setProperty("/boWizard/attributes", attributes);
 
             this.BoAttributeTableVisibleRowRefresh();
         },
         BoAttributeTableVisibleRowRefresh() {
             this.getView().byId("boAttributeTable").setVisibleRowCount(
-                this.getView().getModel().getProperty("/boWizard/attributeList").length
+                this.getView().getModel().getProperty("/boWizard/attributes").length
             );
+        },
+        onGoToBoDetail(event){
+            var boId = event.getSource().getBindingContext().getProperty("id");
+            this.getOwnerComponent().getRouter().navTo("BoDetail", {bo:boId});
         }
 
 

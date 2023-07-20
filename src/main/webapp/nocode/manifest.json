@@ -63,6 +63,13 @@
           "pattern": "BoManage",
           "target": "BoManage"
         },
+        "BoDetail": {
+          "pattern": "BoDetail/{bo}",
+          "target": "BoDetail"
+        },
+
+
+
         "campaignSearch": {
           "pattern": "campaignSearch",
           "target": "campaignSearch"
@@ -87,8 +94,16 @@
         },
         "BoManage": {
           "id": "BoManage",
-          "name": "framework.BoManage"
+          "name": "framework.BO.BoManage"
         },
+        "BoDetail": {
+          "id": "BoDetail",
+          "name": "framework.BO.BoDetail"
+        },
+
+
+
+
         "campaignSearch": {
           "id": "campaignSearch",
           "name": "campaign.campaignSearch"

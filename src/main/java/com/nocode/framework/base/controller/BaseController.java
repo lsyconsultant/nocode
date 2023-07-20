@@ -18,8 +18,7 @@ public class BaseController {
         System.out.println("프로젝트 ID : " + req.getParameter("projectId"));
         System.out.println("프로젝트 이름 : " + req.getParameter("projectNm"));
         System.out.println("프로젝트 경로 : " + req.getParameter("project"));
-        //ㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇ
-        
+
         String projectId = req.getParameter("projectId");
         
         

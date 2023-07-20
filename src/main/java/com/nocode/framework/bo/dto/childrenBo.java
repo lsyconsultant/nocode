@@ -1,4 +1,4 @@
-package com.nocode.framework.login.dto;
+package com.nocode.framework.bo.dto;
 
 public class childrenBo {
 

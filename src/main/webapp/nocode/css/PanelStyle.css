@@ -1,0 +1,31 @@
+
+.sapMPanel {
+    border-radius: 0.75rem !important;
+    background: white !important;
+}
+
+.sapMPanelWrappingDiv.sapMPanelWrappingDivExpanded, .sapMPanelWrappingDivTb.sapMPanelWrappingDivTbExpanded {
+    border-bottom: 0.0625rem solid #a8b3bd !important;
+}
+
+.sapMPanel .sapMPanelHdr, .sapMPanel .sapMTB.sapMPanelHeaderTB {
+    background-color: #fff !important;
+}
+
+.sapMPanelWrappingDiv .sapUiIcon {
+    font-size: 1rem !important;
+}
+
+.sapMPanelHdr {
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    color: #1d2d3e !important;
+}
+
+.sapMPanelContent {
+    padding: 0.625rem 1rem !important;
+}
+
+.sapMPanelBGTranslucent {
+    background-color: #fff !important;
+}
